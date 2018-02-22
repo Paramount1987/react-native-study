@@ -9,9 +9,23 @@ class FindPlaceScreen extends Component {
     render() {
         return (
             <View>
-                <PlaceList places={this.props.places} />
+                <PlaceList places={this.props.places} onItemSelected={this.itemSelectedHandler}/>
             </View>
         );
+    }
+
+    itemSelectedHandler = (key) => {
+        const selectedPlace = this.props.places.find(place => {
+            return place.key === key;
+        });
+
+        this.props.navigator.push({
+            screen: 'awesome-places.PlaceDetailScreen',
+            title: selectedPlace.name,
+            passProps: {
+                selectedPlace
+            }
+        });
     }
 }
 
