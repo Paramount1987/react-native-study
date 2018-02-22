@@ -6,7 +6,7 @@ import PlaceList from './PlaceList/PlaceList';
 import PlaceInput   from './PlaceInput/PlaceInput';
 import PlaceDetail  from './PlaceDetail/PlaceDetail';
 import placeImage   from '../assets/phuket.jpg';
-import {addPlace, deletePlace, selectPlace, deselectPlace}   from '../../src/store/actions/index';
+import {addPlace, deletePlace }   from '../../src/store/actions/index';
 
 class AppContainer extends React.Component {
 
