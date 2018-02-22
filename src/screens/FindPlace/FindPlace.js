@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import PlaceList    from '../../components/PlaceList/PlaceList';
 
 class FindPlaceScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+    }
 
     render() {
         return (
@@ -12,6 +16,16 @@ class FindPlaceScreen extends Component {
                 <PlaceList places={this.props.places} onItemSelected={this.itemSelectedHandler}/>
             </View>
         );
+    }
+
+    onNavigatorEvent = (event) => {
+        if (event.type === 'NavBarButtonPress') {
+            if (event.id === 'sideDrawerToggle') {
+                this.props.navigator.toggleDrawer({
+                    side: 'left'
+                });
+            }
+        }
     }
 
     itemSelectedHandler = (key) => {

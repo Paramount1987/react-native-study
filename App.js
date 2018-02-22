@@ -5,6 +5,7 @@ import AuthScreen   from './src/screens/Auth/Auth';
 import SharePlaceScreen from './src/screens/SharePlace/SharePlace';
 import FindPlaceScreen  from './src/screens/FindPlace/FindPlace';
 import PlaceDetailScreen  from './src/screens/PlaceDetail/PlaceDetail';
+import SideDrawerScreen  from './src/screens/SideDrawer/SideDrawer';
 
 import configureStore   from './src/store/configureStore';
 
@@ -22,6 +23,7 @@ Navigation.registerComponent(
 );
 Navigation.registerComponent('awesome-places.PlaceDetailScreen', () => PlaceDetailScreen, store, Provider);
 
+Navigation.registerComponent('awesome-places.SideDrawerScreen', () => SideDrawerScreen);
 // Start a App
 Navigation.startSingleScreenApp({
     screen: {
