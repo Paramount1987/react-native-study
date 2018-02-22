@@ -20,7 +20,7 @@ Navigation.registerComponent(
     'awesome-places.FindPlaceScreen',
     () => FindPlaceScreen, store, Provider
 );
-Navigation.registerComponent('awesome-places.PlaceDetailScreen', () => PlaceDetailScreen);
+Navigation.registerComponent('awesome-places.PlaceDetailScreen', () => PlaceDetailScreen, store, Provider);
 
 // Start a App
 Navigation.startSingleScreenApp({

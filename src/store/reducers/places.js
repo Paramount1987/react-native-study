@@ -21,10 +21,12 @@ const reducer = (state = initialState, action) => {
             };
 
         case DELETE_PLACE:
+            const {placeKey} = payload;
+
             return {
                 ...state,
                 places: state.places.filter((place) => {
-                    return place.key !== state.selectedPlace.key;
+                    return place.key !== placeKey;
                 })
             };
 
