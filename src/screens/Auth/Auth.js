@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button, TextInput, StyleSheet, ImageBackground, Dimensions } from 'react-native';
-import {connect}    from 'react-native';
+import {connect}    from 'react-redux';
 
 import startMainTabs from '../MainTabs/startMainTabs';
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
