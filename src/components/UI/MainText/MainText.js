@@ -9,7 +9,8 @@ function mainText(props) {
 
 const styles = StyleSheet.create({
     mainText: {
-        color: '#000'
+        color: '#000',
+        backgroundColor: 'transparent'
     }
 });
 
