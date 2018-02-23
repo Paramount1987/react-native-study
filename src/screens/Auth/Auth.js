@@ -5,6 +5,7 @@ import startMainTabs from '../MainTabs/startMainTabs';
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
 import HeadingText  from '../../components/UI/HeadingText/HeadingText';
 import MainText from '../../components/UI/MainText/MainText';
+import ButtonWithBg from '../../components/UI/ButtonWithBg/ButtonWithBg';
 import backgroundImage from '../../assets/background.jpg';
 
 class AuthScreen extends Component {
@@ -16,7 +17,7 @@ class AuthScreen extends Component {
                         <HeadingText>Please Log In</HeadingText>
                     </MainText>
 
-                    <Button title="Switch to Login"/>
+                    <ButtonWithBg color="#29aaf4">Switch to Login</ButtonWithBg>
 
                     <View style={styles.inputContainer}>
                         <DefaultInput placeholder="Your E-mail address" style={styles.input}/>
@@ -24,7 +25,7 @@ class AuthScreen extends Component {
                         <DefaultInput placeholder="Confirm password" style={styles.input}/>
                     </View>
 
-                    <Button title="Submit" onPress={this.loginHandler}/>
+                    <ButtonWithBg onPress={this.loginHandler} color="#29aaf4">Submut</ButtonWithBg>
                 </View>
             </ImageBackground>
         );
