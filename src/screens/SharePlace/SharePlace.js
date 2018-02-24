@@ -87,7 +87,7 @@ class SharePlaceScreen extends Component {
             return {
                 ...prevState,
                 image: {
-                    value: image.uri,
+                    value: image,
                     valid: true
                 }
             }
