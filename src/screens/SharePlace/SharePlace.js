@@ -19,6 +19,10 @@ class SharePlaceScreen extends Component {
         location: {
             value: null,
             valid: false
+        },
+        image: {
+            value: null,
+            valid: false
         }
     }
 
@@ -36,7 +40,9 @@ class SharePlaceScreen extends Component {
                         <HeadingText>Share a Place with us!</HeadingText>
                     </MainText>
 
-                    <PickImage/>
+                    <PickImage
+                        onImagePicked={this.imagePickedHandler}
+                    />
                     <PickLocation onLocationPick={this.locationPickedHandler}/>
 
                     <PlaceInput
@@ -76,9 +82,25 @@ class SharePlaceScreen extends Component {
         });
     }
 
+    imagePickedHandler = image => {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                image: {
+                    value: image.uri,
+                    valid: true
+                }
+            }
+        });
+    }
+
     placeAddedHandler = () => {
         if (this.state.placeName.trim() !== '')
-            this.props.addPlace(this.state.placeName, this.state.location.value);
+            this.props.addPlace(
+                this.state.placeName,
+                this.state.location.value,
+                this.state.image.value
+                );
     }
 
     placeNameChangedHandler = val => {
@@ -95,7 +117,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
     return {
-        addPlace: (placeName, location) => dispatch(addPlace(placeName, location))
+        addPlace: (placeName, location, image) => dispatch(addPlace(placeName, location, image))
     };
 };
 
