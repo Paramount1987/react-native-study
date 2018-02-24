@@ -15,8 +15,7 @@ const reducer = (state = initialState, action) => {
                     key: Math.random(),
                     name: payload.placeName,
                     image: {
-                        uri: payload.uri,
-                        base64: payload.base64
+                        uri: payload.uri
                     },
                     location: payload.location
                 })
