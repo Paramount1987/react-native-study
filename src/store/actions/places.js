@@ -27,28 +27,28 @@ export const addPlace = (placeName, location, image) => {
                 return   fetch('https://awesome-places-84c12.firebaseio.com/places.json', {
                                 method: 'POST',
                                 body: JSON.stringify(placeData)
-                            });
+                            })
             })
-                .catch(err => {
-                    console.log(err);
-                    alert('Something went wrong, please try again');
-                    dispatch(uiStopLoading());
-                })
-                .then(res => res.json())
-                .then(parsedRes => {
-                    console.log(parsedRes);
-                    dispatch(uiStopLoading());
-                });
+            .then(res => res.json())
+            .then(parsedRes => {
+                console.log(parsedRes);
+                dispatch(uiStopLoading());
+            })
+            .catch(err => {
+                console.log(err);
+                alert('Something went wrong, please try again');
+                dispatch(uiStopLoading());
+            });
     }
 };
 
 export const getPlaces = () => {
-    return dispatch => {
-        fetch('https://awesome-places-84c12.firebaseio.com/places.json')
-            .catch(err => {
-                alert('Something went wrong, sorry :/');
-                console.log(err);
-            })
+    return (dispatch, getState) => {
+        const token = getState().auth.token;
+        if (!token) {
+            return;
+        }
+        fetch('https://awesome-places-84c12.firebaseio.com/places.json?auth=' + token)
             .then(res => res.json())
             .then(parsedRes => {
                 const places = [];
@@ -62,6 +62,10 @@ export const getPlaces = () => {
                     });
                 }
                 dispatch(setPlaces(places));
+            })
+            .catch(err => {
+                alert('Something went wrong, sorry :/');
+                console.log(err);
             });
     }
 };
@@ -74,6 +78,23 @@ export const setPlaces = places => {
 };
 
 export const deletePlace = (key) => {
+    return dispatch => {
+        dispatch(removePlace(key));
+        fetch('https://awesome-places-84c12.firebaseio.com/places/' + key, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(parsedRes => {
+                console.log('Done!');
+            })
+            .catch(err => {
+                alert('Something went wrong, sorry :/');
+                console.log(err);
+            });
+    }
+};
+
+export const removePlace = key => {
     return {
         type: DELETE_PLACE,
         payload: {placeKey: key}
