@@ -1,5 +1,5 @@
-import {TRY_AUTH, AUTH_SET_TOKEN}   from './actionTypes';
-import { uiStopLoading, uiStartLoading } from './index';
+import {TRY_AUTH, AUTH_SET_TOKEN} from './actionTypes';
+import {uiStopLoading, uiStartLoading} from './index';
 import startMainTabs from "../../screens/MainTabs/startMainTabs";
 
 export const tryAuth = (authData, authMode) => {
@@ -51,4 +51,18 @@ export const authSetToken = token => {
             token: token
         }
     }
-}
+};
+
+export const authGetToken = () => {
+    return (dispatch, getState) => {
+        const promise = new Promise((resolve, reject) => {
+            const token = getState().auth.token;
+            if (!token) {
+                reject();
+            } else {
+                resolve(token);
+            }
+        });
+        return promise;
+    };
+};
