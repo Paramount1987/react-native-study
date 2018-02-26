@@ -18,6 +18,8 @@ import PickLocation from '../../components/PickLocation/PickLocation';
 import MainText from '../../components/UI/MainText/MainText';
 import HeadingText from '../../components/UI/HeadingText/HeadingText';
 
+import { startAddPlace }   from '../../store/actions/index';
+
 class SharePlaceScreen extends Component {
     static navigatorStyle = {
         navBarButtonColor: 'orange'
@@ -30,6 +32,13 @@ class SharePlaceScreen extends Component {
 
     componentWillMount() {
         this.reset();
+    }
+
+    componentDidUpdate() {
+        if (this.props.placeAdded) {
+            this.props.navigator.switchToTab({tabIndex: 0});
+            //this.props.onStartAddPlace();
+        }
     }
 
     render() {
@@ -71,6 +80,11 @@ class SharePlaceScreen extends Component {
     }
 
     onNavigatorEvent = (event) => {
+        if (event.type === 'ScreenChangedEvent') {
+            if (event.id === 'willAppear') {
+                this.props.onStartAddPlace();
+            }
+        }
         if (event.type === 'NavBarButtonPress') {
             if (event.id === 'sideDrawerToggle') {
                 this.props.navigator.toggleDrawer({
@@ -145,13 +159,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.ui.isLoading
+        isLoading: state.ui.isLoading,
+        placeAdded: state.places.placeAdded
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addPlace: (placeName, location, image) => dispatch(addPlace(placeName, location, image))
+        addPlace: (placeName, location, image) => dispatch(addPlace(placeName, location, image)),
+        onStartAddPlace: () => dispatch(startAddPlace())
     };
 };
 
