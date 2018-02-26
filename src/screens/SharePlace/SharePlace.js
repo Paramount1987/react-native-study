@@ -23,21 +23,13 @@ class SharePlaceScreen extends Component {
         navBarButtonColor: 'orange'
     }
 
-    state = {
-        placeName: '',
-        location: {
-            value: null,
-            valid: false
-        },
-        image: {
-            value: null,
-            valid: false
-        }
-    }
-
     constructor(props) {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+    }
+
+    componentWillMount() {
+        this.reset();
     }
 
     render() {
@@ -60,8 +52,12 @@ class SharePlaceScreen extends Component {
 
                     <PickImage
                         onImagePicked={this.imagePickedHandler}
+                        ref={ref => (this.imagePicker = ref)}
                     />
-                    <PickLocation onLocationPick={this.locationPickedHandler}/>
+                    <PickLocation
+                        onLocationPick={this.locationPickedHandler}
+                        ref={ref => (this.locationPicker = ref)}
+                    />
 
                     <PlaceInput
                         placeName={this.state.placeName}
@@ -115,10 +111,28 @@ class SharePlaceScreen extends Component {
                 this.state.location.value,
                 this.state.image.value
                 );
+
+        this.reset();
+        this.imagePicker.reset();
+        this.locationPicker.reset();
     }
 
     placeNameChangedHandler = val => {
         this.setState({placeName: val});
+    }
+
+    reset = () => {
+        this.setState({
+            placeName: '',
+            location: {
+                value: null,
+                valid: false
+            },
+            image: {
+                value: null,
+                valid: false
+            }
+        });
     }
 }
 

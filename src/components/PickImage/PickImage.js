@@ -43,6 +43,12 @@ class PickImage extends Component {
             }
         });
     }
+
+    reset = () => {
+        this.setState({
+            pickedImage: null
+        });
+    }
 }
 
 const styles = StyleSheet.create({
