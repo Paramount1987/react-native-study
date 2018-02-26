@@ -31,7 +31,13 @@ export const addPlace = (placeName, location, image) => {
                 alert('Something went wrong, please try again');
                 dispatch(uiStopLoading());
             })
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error();
+                }
+            })
             .then(parsedRes => {
                 const placeData = {
                     name: placeName,
@@ -44,7 +50,13 @@ export const addPlace = (placeName, location, image) => {
                                 body: JSON.stringify(placeData)
                             })
             })
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error();
+                }
+            })
             .then(parsedRes => {
                 console.log(parsedRes);
                 dispatch(uiStopLoading());
@@ -71,7 +83,13 @@ export const getPlaces = () => {
                 return fetch('https://awesome-places-84c12.firebaseio.com/places.json?auth=' + token);
             })
             .catch(() => alert('No valid token found!'))
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error();
+                }
+            })
             .then(parsedRes => {
                 const places = [];
                 for (let key in parsedRes) {
@@ -110,7 +128,13 @@ export const deletePlace = (key) => {
                         method: 'DELETE'
                     });
             })
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error();
+                }
+            })
             .then(parsedRes => {
                 console.log('Done!');
             })
